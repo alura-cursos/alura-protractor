@@ -1,5 +1,4 @@
-import { browser, by, element } from 'protractor';
-import { isRegExp } from 'util';
+import { browser, by, element, protractor } from 'protractor';;
 
 describe('Home Page', () => {
 
@@ -19,7 +18,7 @@ describe('Home Page', () => {
   it('Should navigate to photo detail when photo navigation is triggered', async () => {
     await browser.get(`${browser.baseUrl}/#/user/flavio`);
     const firstElement = element.all(by.css('.photo')).first();
-    await firstElement.click();
+    await firstElement.sendKeys(protractor.Key.ENTER);
     const title = await browser.getTitle();
     expect(title).toBe('Photo detail');
   });
