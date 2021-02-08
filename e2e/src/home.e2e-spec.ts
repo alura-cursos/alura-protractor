@@ -12,23 +12,27 @@ describe('Home Page', () => {
   });
 
   it('Should display a list of photos', async () => {
-    const list = element.all(by.css('.photo'));
-    const photoListSize = await list.count();
+    const photoListSize = await element
+      .all(by.css('.photo'))
+      .count();
     expect(photoListSize).toBeGreaterThan(0);
   });
 
   it('Should navigate to photo detail when photo navigation is triggered', async () => {
-    const firstElement = element.all(by.css('.photo')).first();
-    await firstElement.sendKeys(protractor.Key.ENTER);
+    await element
+      .all(by.css('.photo'))
+      .first()
+      .sendKeys(protractor.Key.ENTER);
     const title = await browser.getTitle();
     expect(title).toBe('Photo detail');
   });
 
   it('Should list one item when filtering by word "farol"', async () => {
-    const searchInput = element(by.css('ap-search input[type=search]'));
-    await searchInput.sendKeys('farol');
-    const list = element.all(by.css('.photo'));
-    const photoListSize = await list.count();
+    await element(by.css('ap-search input[type=search]'))
+      .sendKeys('farol');
+    const photoListSize = await element
+      .all(by.css('.photo'))
+      .count();
     expect(photoListSize).toBe(1);
   });
 });
