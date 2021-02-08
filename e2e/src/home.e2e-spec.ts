@@ -22,4 +22,13 @@ describe('Home Page', () => {
     const title = await browser.getTitle();
     expect(title).toBe('Photo detail');
   });
+
+  it('Should list one item when filtering by word "farol"', async () => {
+    await browser.get(`${browser.baseUrl}/#/user/flavio`);
+    const searchInput = element(by.css('ap-search input[type=search]'));
+    await searchInput.sendKeys('farol');
+    const list = element.all(by.css('.photo'));
+    const photoListSize = await list.count();
+    expect(photoListSize).toBe(1);
+  });
 });
