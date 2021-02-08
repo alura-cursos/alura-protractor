@@ -1,11 +1,12 @@
 import { sign } from 'crypto';
 import { browser, logging } from 'protractor';
+import { SignInPage } from './signin.po';
 import { SignUpPage } from './signup.po';
 
 describe('SignUp Page', () => {
 
   let signUpPage: SignUpPage = null;
-
+  let signInPage: SignInPage = null;
   afterEach(async () => {
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
     expect(logs).not.toContain(jasmine.objectContaining({
@@ -15,6 +16,7 @@ describe('SignUp Page', () => {
 
   beforeEach(async () => {
     signUpPage = new SignUpPage();
+    signInPage = new SignInPage();
     await signUpPage.navigateTo();
   });
 
@@ -32,6 +34,8 @@ describe('SignUp Page', () => {
     const password = '12345678';
     await signUpPage.fillPasswordField(password);
     await signUpPage.register();
+    const title = await signInPage.getTitle();
+    expect(title).toEqual(SignInPage.PAGE_TITLE);
   });
 
 });
