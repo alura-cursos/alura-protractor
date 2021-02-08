@@ -1,4 +1,5 @@
 import { browser, by, element } from 'protractor';
+import { isRegExp } from 'util';
 
 describe('Home Page', () => {
 
@@ -13,5 +14,13 @@ describe('Home Page', () => {
     const list = element.all(by.css('.photo'));
     const photoListSize = await list.count();
     expect(photoListSize).toBeGreaterThan(0);
+  });
+
+  it('Should navigate to photo detail when photo navigation is triggered', async () => {
+    await browser.get(`${browser.baseUrl}/#/user/flavio`);
+    const firstElement = element.all(by.css('.photo')).first();
+    await firstElement.click();
+    const title = await browser.getTitle();
+    expect(title).toBe('Photo detail');
   });
 });
