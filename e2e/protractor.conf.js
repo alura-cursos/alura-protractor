@@ -36,5 +36,30 @@ exports.config = {
         displayStacktrace: StacktraceOption.PRETTY
       }
     }));
+
+    // @ts-ignore
+    browser.driver.get('http://localhost:4200/#/home');
+    // @ts-ignore
+    browser.driver
+      // @ts-ignore
+      .findElement(by.id('username'))
+      .sendKeys('flavio');
+    // @ts-ignore
+    browser.driver
+      // @ts-ignore
+      .findElement(by.id('password'))
+      .sendKeys('123');
+    // @ts-ignore
+    browser.driver
+      // @ts-ignore
+      .findElement(by.id('login-button'))
+      .click();
+    // @ts-ignore
+    return browser.driver.wait(() => {
+      // @ts-ignore
+      return browser.driver.getCurrentUrl().then(url => {
+        return /user/.test(url);
+      });
+    }, 10000);
   }
 };
