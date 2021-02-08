@@ -1,5 +1,4 @@
-import { browser } from 'protractor';
-
+import { browser, by, element, protractor } from 'protractor';
 export class HomePage {
 
   navigateTo() {
@@ -8,5 +7,23 @@ export class HomePage {
 
   getWindowTitle() {
     return browser.getTitle();
+  }
+
+  getPhotoListSize() {
+    return element
+      .all(by.css('.photo'))
+      .count();
+  }
+
+  fillSearchInputWith(text: string) {
+    return element(by.css('ap-search input[type=search]'))
+      .sendKeys(text);
+  }
+
+  clickOnFirstItemFromPhotoList() {
+    return element
+      .all(by.css('.photo'))
+      .first()
+      .sendKeys(protractor.Key.ENTER);
   }
 }

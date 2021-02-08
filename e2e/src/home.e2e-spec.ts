@@ -1,5 +1,5 @@
-import { browser, by, element, protractor } from 'protractor';import { HomePage } from './home.po';
-;
+import { browser } from 'protractor';
+import { HomePage } from './home.po';
 
 describe('Home Page', () => {
 
@@ -15,27 +15,19 @@ describe('Home Page', () => {
   });
 
   it('Should display a list of photos', async () => {
-    const photoListSize = await element
-      .all(by.css('.photo'))
-      .count();
+    const photoListSize = await homePage.getPhotoListSize();
     expect(photoListSize).toBeGreaterThan(0);
   });
 
   it('Should navigate to photo detail when photo navigation is triggered', async () => {
-    await element
-      .all(by.css('.photo'))
-      .first()
-      .sendKeys(protractor.Key.ENTER);
+    await homePage.clickOnFirstItemFromPhotoList();
     const title = await browser.getTitle();
     expect(title).toBe('Photo detail');
   });
 
   it('Should list one item when filtering by word "farol"', async () => {
-    await element(by.css('ap-search input[type=search]'))
-      .sendKeys('farol');
-    const photoListSize = await element
-      .all(by.css('.photo'))
-      .count();
+    await homePage.fillSearchInputWith('farol');
+    const photoListSize = await homePage.getPhotoListSize();
     expect(photoListSize).toBe(1);
   });
 });
