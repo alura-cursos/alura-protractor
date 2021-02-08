@@ -1,6 +1,8 @@
 import { browser, by, element, protractor } from 'protractor';
 export class HomePage {
 
+  static PAGE_TITLE = 'Timeline';
+
   navigateTo() {
     return browser.get(`${browser.baseUrl}/#/user/flavio`);
   }
