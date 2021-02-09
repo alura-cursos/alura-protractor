@@ -38,6 +38,11 @@ exports.config = {
     }));
 
     // @ts-ignore
+    by.addLocator('formControlName', control => {
+      return document.querySelector(`[formcontrolname=${control}]`);
+    });
+
+    // @ts-ignore
     browser.driver.get('http://localhost:4200/#/home');
     // @ts-ignore
     browser.driver

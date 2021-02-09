@@ -11,8 +11,9 @@ export class SignUpPage {
     return browser.getTitle();
   }
 
-  fillField(formControlName: string, text:string) {
-    return element(by.css(`input[formcontrolname=${formControlName}]`))
+  fillField(control: string, text:string) {
+
+    return element(by.formControlName(control))
       .sendKeys(text);
   }
 
